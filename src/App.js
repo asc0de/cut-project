@@ -11,7 +11,7 @@ class App extends Component {
       <MuiThemeProvider>
         <Router>
           <div className="app">
-            <AppBar title="Обрезать картинку" showMenuIconButton={false}/>
+            <AppBar title="Obrezka.online" style={{textAlign: "center"}} showMenuIconButton={false}/>
             <Content/>
         </div>
         </Router>
