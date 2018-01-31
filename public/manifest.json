@@ -1,5 +1,6 @@
 {
-    "name": "",
+    "name": "Obrezka Online",
+    "short_name": "Obrezka",
     "icons": [
         {
             "src": "favicon.ico",
@@ -17,7 +18,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
+    "theme_color": "#00bcd4",
     "background_color": "#ffffff",
     "display": "standalone"
 }
