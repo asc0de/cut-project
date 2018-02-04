@@ -144,7 +144,7 @@ class WizardStepper extends Component {
 
     loadResultPage = props => {
       return (
-        <img alt='Обрезанное изображение фото' src={this.state.blobUrl}/>
+        <img alt='Обрезанное изображение фото' style={{borderRadius: this.state.imageEditor.borderRadius + "%"}} src={this.state.blobUrl}/>
       );
     }
   
