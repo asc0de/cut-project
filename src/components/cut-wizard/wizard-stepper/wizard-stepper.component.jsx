@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+// material ui
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
+import Slider from 'material-ui/Slider';
+// Custom components
 import UploadButton from './upload-button/upload-button.component';
 import UploadPlaceholder from './upload-placeholder/upload-placeholder.component';
 import AvatarEditor from 'react-avatar-editor';
@@ -20,10 +23,12 @@ class WizardStepper extends Component {
       file: null,
       blobUrl: './placeholder.jpg',
       imageEditor: {
-        rotate: 0
+        rotate: 0,
+        scale: 1
       }
     };
 
+    // Controls
     rotateRight() {
       this.setState({
         imageEditor: {
@@ -38,6 +43,15 @@ class WizardStepper extends Component {
         imageEditor: {
           ...this.state.imageEditor,
           rotate: this.state.imageEditor.rotate -= 90
+        }
+      })
+    }
+
+    onScaleChange(e, value) {
+      this.setState({
+        imageEditor: {
+          ...this.state.imageEditor,
+          scale: value
         }
       })
     }
@@ -112,7 +126,8 @@ class WizardStepper extends Component {
           ref={this.setEditorRef.bind(this)} 
           image={this.state.file} 
           style={{...this.state.imageInfo}}
-          rotate={this.state.imageEditor.rotate}/>
+          rotate={this.state.imageEditor.rotate}
+          scale={this.state.imageEditor.scale}/>
       );
     };
 
@@ -160,6 +175,16 @@ class WizardStepper extends Component {
                       <IconButton onClick={this.rotateRight.bind(this)} tooltip="Повернуть вправо" touch={true} tooltipPosition="top-center">
                         <RotateRight />
                       </IconButton>
+                    </div>
+                    <div className="action-buttons-section">
+                      <span style={{marginRight: "1em"}}>Масштаб:</span>
+                      <Slider 
+                        defaultValue={1} 
+                        min={1} 
+                        max={3} 
+                        onChange={this.onScaleChange.bind(this)}
+                        style={{flex: "1"}}
+                        sliderStyle={{marginTop: "0", marginBottom: "1em"}}/>
                     </div>
                     <div className="action-buttons-section">
                       <RaisedButton label='Назад' onClick={this.handlePrev.bind(this)}/>

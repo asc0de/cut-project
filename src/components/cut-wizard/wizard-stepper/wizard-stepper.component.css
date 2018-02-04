@@ -34,3 +34,12 @@
 .wizard-stepper-container .action-buttons .action-buttons-section > div:not(:last-child) {
     margin-right: 1em;
 }
+
+.wizard-stepper-container .action-buttons .action-buttons-section .scale-slider {
+    flex: 1;
+}
+
+.wizard-stepper-container .action-buttons .action-buttons-section .scale-slider > div {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
