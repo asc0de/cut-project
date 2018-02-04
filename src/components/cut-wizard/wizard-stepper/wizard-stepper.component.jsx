@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import UploadButton from './upload-button/upload-button.component';
+import UploadPlaceholder from './upload-placeholder/upload-placeholder.component';
 import AvatarEditor from 'react-avatar-editor';
-import { getImageSize, loadFileToUser, isMobile } from '../../../helpers/image-size-helper';
+import { getImageSize, loadFileToUser, isMobile } from '../../../helpers/app-helper';
 import { Route, withRouter } from 'react-router-dom';
 import './wizard-stepper.component.css';
 
@@ -77,7 +78,7 @@ class WizardStepper extends Component {
     }
 
     indexPage = props => {
-      return (<img alt='Схематическое изображение фото' src='./placeholder.jpg'/>);
+      return (<UploadPlaceholder onUpload={this.onUpload.bind(this)}/>);
     };
 
     cutPhotoPage = props => {

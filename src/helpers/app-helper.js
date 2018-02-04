@@ -41,3 +41,22 @@ export function loadFileToUser(canvas, filename, onCreateBlob) {
 export function isMobile() {
     return window.matchMedia("(max-width: 600px)").matches;
 }
+
+export function parseImage(file) {
+    return new Promise((resolve, reject) => {
+        const photo = file;
+        let fr = new FileReader;
+    
+        fr.onload = function() {
+            let img = new Image;
+    
+            img.onload = function() {
+                resolve({photo: photo, image: img})
+            }.bind(this);
+    
+            img.src = fr.result;
+        }.bind(this);
+    
+        fr.readAsDataURL(photo);
+    });
+}
