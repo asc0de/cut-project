@@ -23,11 +23,14 @@
     margin-top: 1em;
     margin-bottom: 1em;
     display: flex;
-    width: 100%;
+    flex-direction: column;
+}
+
+.wizard-stepper-container .action-buttons .action-buttons-section {
+    display: flex;
     justify-content: center;
 }
 
-.wizard-stepper-container .action-buttons > div {
-    margin: 0.5em;
-    flex: 1;
+.wizard-stepper-container .action-buttons .action-buttons-section > div:not(:last-child) {
+    margin-right: 1em;
 }

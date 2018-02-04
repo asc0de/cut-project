@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
 import UploadButton from './upload-button/upload-button.component';
 import UploadPlaceholder from './upload-placeholder/upload-placeholder.component';
 import AvatarEditor from 'react-avatar-editor';
 import { getImageSize, loadFileToUser, isMobile } from '../../../helpers/app-helper';
 import { Route, withRouter } from 'react-router-dom';
+// Icons
+import RotateRight from 'material-ui/svg-icons/image/rotate-right';
+import RotateLeft from 'material-ui/svg-icons/image/rotate-left';
 import './wizard-stepper.component.css';
 
 class WizardStepper extends Component {
@@ -15,7 +19,28 @@ class WizardStepper extends Component {
       image: null,
       file: null,
       blobUrl: './placeholder.jpg',
+      imageEditor: {
+        rotate: 0
+      }
     };
+
+    rotateRight() {
+      this.setState({
+        imageEditor: {
+          ...this.state.imageEditor,
+          rotate: this.state.imageEditor.rotate += 90
+        }
+      })
+    }
+
+    rotateLeft() {
+      this.setState({
+        imageEditor: {
+          ...this.state.imageEditor,
+          rotate: this.state.imageEditor.rotate -= 90
+        }
+      })
+    }
 
     onUpload = (file, image) => {
       this.setState({file: file, image: image, imageInfo: getImageSize(image)},this.handleNext);
@@ -83,7 +108,11 @@ class WizardStepper extends Component {
 
     cutPhotoPage = props => {
       return (
-        <AvatarEditor ref={this.setEditorRef.bind(this)} image={this.state.file} style={{...this.state.imageInfo}}/>
+        <AvatarEditor 
+          ref={this.setEditorRef.bind(this)} 
+          image={this.state.file} 
+          style={{...this.state.imageInfo}}
+          rotate={this.state.imageEditor.rotate}/>
       );
     };
 
@@ -124,8 +153,18 @@ class WizardStepper extends Component {
             case 1:
               return (
                 <div className='action-buttons'>
-                    <RaisedButton label='Назад' onClick={this.handlePrev.bind(this)}/>
-                    <RaisedButton label='Обрезать' primary={true} onClick={this.onCutClick.bind(this)}/>
+                    <div className="action-buttons-section">
+                      <IconButton onClick={this.rotateLeft.bind(this)} tooltip="Повернуть влево" touch={true} tooltipPosition="top-center">
+                        <RotateLeft />
+                      </IconButton>
+                      <IconButton onClick={this.rotateRight.bind(this)} tooltip="Повернуть вправо" touch={true} tooltipPosition="top-center">
+                        <RotateRight />
+                      </IconButton>
+                    </div>
+                    <div className="action-buttons-section">
+                      <RaisedButton label='Назад' onClick={this.handlePrev.bind(this)}/>
+                      <RaisedButton label='Обрезать' primary={true} onClick={this.onCutClick.bind(this)}/>
+                    </div>
                 </div>
               );
             default:
