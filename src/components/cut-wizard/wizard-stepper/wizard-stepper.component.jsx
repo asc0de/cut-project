@@ -7,6 +7,7 @@ import Slider from 'material-ui/Slider';
 // Custom components
 import UploadButton from './upload-button/upload-button.component';
 import UploadPlaceholder from './upload-placeholder/upload-placeholder.component';
+import CutMode from './cut-mode/cut-mode.component';
 import AvatarEditor from 'react-avatar-editor';
 import { getImageSize, loadFileToUser, isMobile } from '../../../helpers/app-helper';
 import { Route, withRouter } from 'react-router-dom';
@@ -54,6 +55,15 @@ class WizardStepper extends Component {
           scale: value
         }
       })
+    }
+
+    onModeChange(borderRadius) {
+      this.setState({
+        imageEditor: {
+          ...this.state.imageEditor,
+          borderRadius: borderRadius
+        }
+      });
     }
 
     onUpload = (file, image) => {
@@ -127,7 +137,8 @@ class WizardStepper extends Component {
           image={this.state.file} 
           style={{...this.state.imageInfo}}
           rotate={this.state.imageEditor.rotate}
-          scale={this.state.imageEditor.scale}/>
+          scale={this.state.imageEditor.scale}
+          borderRadius={this.state.imageEditor.borderRadius}/>
       );
     };
 
@@ -175,6 +186,7 @@ class WizardStepper extends Component {
                       <IconButton onClick={this.rotateRight.bind(this)} tooltip="Повернуть вправо" touch={true} tooltipPosition="top-center">
                         <RotateRight />
                       </IconButton>
+                      <CutMode onModeChange={this.onModeChange.bind(this)}/>
                     </div>
                     <div className="action-buttons-section">
                       <span style={{marginRight: "1em"}}>Масштаб:</span>
