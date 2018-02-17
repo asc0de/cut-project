@@ -10,13 +10,13 @@ let httpRouter = express.Router();
 
 httpApp.use('/', httpRouter);
 httpRouter.get('/', function(req, res){
-    if (req.protocol === "http") {
-      let host = req.get('host');
-      let destination = ['https://', host, req.url].join('');
-      return res.redirect(destination);
-    } else {
+    // if (req.protocol === "http") {
+    //   let host = req.get('host');
+    //   let destination = ['https://', host, req.url].join('');
+    //   return res.redirect(destination);
+    // } else {
       return res.sendFile(__dirname + '/build/index.html')
-    }
+    // }
 });
 
 http.createServer(httpApp).listen(80);
